@@ -32,7 +32,7 @@ for y=1:H
 end
 ```
 
-Using the same method the difference between the y-gradients of v and the x-gradients of s is calculated
+Using the same method the difference between the y-gradients of v and the y-gradients of s is calculated
 ```matlab
 for x=1:W
     for y=1:H-1
