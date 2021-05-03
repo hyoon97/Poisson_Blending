@@ -57,6 +57,7 @@ figure;
 imshow(toy_recon);
 ```
 <img src='./data/toy_problem.png'>
+<img src='./images/toy.png'>
 
 ## Poisson Blending
 
@@ -180,7 +181,7 @@ for y=1:H
 <img src='./images/mixed_gradient.png'>
 ## My Own
 <img src='./data/810 Arabian Sand Desert - D Olson.jpg'>
-<img src='./data/final_image00002-1.jpgk'>
+<img src='./data/final_image00002-1.jpg'>
 
 <img src='./images/poisson_shark.png'>
 <img src='./images/mixed_shark.png'>
