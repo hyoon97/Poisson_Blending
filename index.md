@@ -93,7 +93,7 @@ image_blended1 = Poisson_Blending(source1, mask1, hiking_resized);
 image_blended2 = Poisson_Blending(source2, mask2, image_blended1);
 ```
 <img src='./images/mask.png'>
-<img src='./images/aligned_images.png'>
+<img src='./images/aligned_image.png'>
 <img src='./images/naive_blending.png'>
 
 
