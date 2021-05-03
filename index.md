@@ -112,6 +112,7 @@ for y=1:H
 ```
 ## Mixed Gradient Blending
 
+While Poisson blending solely based on the gradient of a source, the Mixed Gradient blending chooses either source's or target's gradient difference. The gradient with the largest magnitude will be choosed. Hence, for all direction, the magnitudes of gradient difference is compared to choose one of them. After. `A` and `b` are computed, the image is reconstructed using the same method as the Poisson blending. 
 ```matlab
 for y=1:H
         for x=1:W
