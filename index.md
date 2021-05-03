@@ -56,6 +56,8 @@ toy_recon = reshape(v, [H, W]);
 figure;
 imshow(toy_recon);
 ```
+<img src='./data/toy_problem.png'>
+<img src='./images/toy.png'>
 
 ## Poisson Blending
 
@@ -90,6 +92,10 @@ image_blended1 = Poisson_Blending(source1, mask1, hiking_resized);
 [source2, mask2] = alignSource(penguin2_resized, penguin2_mask, image_blended1);
 image_blended2 = Poisson_Blending(source2, mask2, image_blended1);
 ```
+<img src='./images/mask.png'>
+<img src='./images/aligned_images.png'>
+<img src='./images/naive_blending.png'>
+
 
 Poisson blending follows the same initialization of variables and reconstruction of image as the `Toy_Problem`. The only difference is that the filtering is applied to blend two different image based on their gradient difference. 
 ```matlab
@@ -110,6 +116,9 @@ for y=1:H
         end
     end
 ```
+<img src='./images/poisson_blending1.png'>
+<img src='./images/poisson_blending2.png'>
+
 ## Mixed Gradient Blending
 
 While Poisson blending solely based on the gradient of a source, the Mixed Gradient blending chooses either source's or target's gradient difference. The gradient with the largest magnitude will be choosed. Hence, for all direction, the magnitudes of gradient difference is compared to choose one of them. After. `A` and `b` are computed, the image is reconstructed using the same method as the Poisson blending. 
@@ -169,5 +178,8 @@ for y=1:H
         end
     end
 ```
-
+<img src='./images/mixed_gradient.png'>
 ## My Own
+
+<img src='./images/poisson_shark.png'>
+<img src='./images/mixed_shark.png'>
