@@ -57,7 +57,7 @@ figure;
 imshow(toy_recon);
 ```
 <img src='./data/toy_problem.png'>
-<img src='./images/toy.png'>
+<img src='./images/toy_recon.png'>
 
 ## Poisson Blending
 
