@@ -1,37 +1,58 @@
-## Welcome to GitHub Pages
+# Poisson Blending
 
-You can use the [editor on GitHub](https://github.com/hyoon97/Poisson_Blending/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Toy Problem
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+In this section, the image "toy_problem.png" will be reconstructed by matching x and y gradients and one pixel.  
+The pixels are mapped to variable using the variable `im2var`.
+As recommended in the assignment sheet, `sparse` funciton is used to initialize large variable 
 
-### Markdown
+```matlab
+toy_img = imread('data/toy_problem.png');
+toy_double = im2double(toy_img);
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[H, W, C] = size(toy_img);
 
-```markdown
-Syntax highlighted code block
+im2var = zeros(H, W);
+im2var(1:H*W) = 1:H*W;
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+A = sparse((H-1)*W+(W-1)*H, H * W);
+b = zeros(H*W, C);
+e = 1;
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+After initializing the variables, the difference between the x-gradients of v and the x-gradients of s is calculated
+```matlab
+for y=1:H
+    for x=1:W-1
+        A(e, im2var(y, x+1)) = 1;
+        A(e, im2var(y, x)) = -1;
+        b(e) = toy_double(y, x+1) - toy_double(y, x);
+        e = e + 1;
+    end
+end
+```
 
-### Jekyll Themes
+Using the same method the difference between the y-gradients of v and the x-gradients of s is calculated
+```matlab
+for x=1:W
+    for y=1:H-1
+        A(e, im2var(y+1, x)) = 1;
+        A(e, im2var(y, x)) = -1;
+        b(e) = toy_double(y+1, x) - toy_double(y, x);
+        e = e + 1;
+    end
+end
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hyoon97/Poisson_Blending/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+We use `lscov` function to solve least square problem to obtain `v`. 
+Once `v` is computed, `v` is reshaped as an reconstructed image.
+```matlab
+A(e, im2var(1,1)) = 1;
+b(e) = toy_double(1,1);
 
-### Support or Contact
+v = lscov(A, b);
+toy_recon = reshape(v, [H, W]);
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+figure;
+imshow(toy_recon);
+```
