@@ -116,8 +116,8 @@ for y=1:H
         end
     end
 ```
-<img src='./images/poisson_blending1.png'>
-<img src='./images/poisson_blending2.png'>
+<img src='./images/Poisson_Blending1.png'>
+<img src='./images/Poisson_Blending2.png'>
 
 ## Mixed Gradient Blending
 
